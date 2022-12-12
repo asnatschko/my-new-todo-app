@@ -5,15 +5,25 @@ import { useState } from "react";
 
 function App() {
   const todos = [
-    { id: 1, title: "React lernen" },
-    { id: 2, title: "Kochen" },
-    { id: 3, title: "Staubsaugen" },
-    { id: 4, title: "Boden wischen" },
-    { id: 5, title: "Lesen" },
+    { id: 1, title: "React lernen", isDone: false },
+    { id: 2, title: "Kochen", isDone: false },
+    { id: 3, title: "Staubsaugen", isDone: false },
+    { id: 4, title: "Boden wischen", isDone: false },
+    { id: 5, title: "Lesen", isDone: false },
   ];
 
   //State um die eingegebenen Todos in der (blauen) Liste zu sehen:
   const [todoList, setTodoList] = useState(todos);
+
+  function toggleItem(todoId) {
+    const updatedTodos = todoList.map((item) => {
+      if (item.id === todoId) {
+        item.isDone = !item.isDone;
+      }
+      return item;
+    });
+    setTodoList(updatedTodos);
+  }
 
   function addTodo(newTodo) {
     //   //Neue State: Füge das neue Todo an den Anfang der Liste
@@ -36,6 +46,8 @@ function App() {
             id={todo.id}
             title={todo.title}
             onRemoveTodo={removeTodo}
+            isChecked={todo.isDone}
+            onToggleItem={toggleItem}
           />
         ))}
       </ul>

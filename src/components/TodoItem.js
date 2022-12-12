@@ -1,14 +1,31 @@
+//import { useState } from "react";
 import "./TodoItem.css";
 
-export default function TodoItem({ id, title, onRemoveTodo }) {
+export default function TodoItem({
+  id,
+  isChecked,
+  title,
+  onRemoveTodo,
+  onToggleItem,
+}) {
   function handleClick() {
     onRemoveTodo(id);
   }
 
+  // function handleChange() {
+  //   setIsDone(!isDone);
+  // }
+  // =>WEnn ich das State ändere,
+  //wird die komplette TodoItem neu gerendert
+
   return (
     <li>
-      <label>
-        <input type="checkbox" />
+      <label className={isChecked ? "strike-through" : ""}>
+        <input
+          onChange={() => onToggleItem(id)}
+          type="checkbox"
+          checked={isChecked}
+        />
         {title}
       </label>
       <button onClick={handleClick} className="removeButton">
