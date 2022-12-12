@@ -1,6 +1,7 @@
+import { nanoid } from "nanoid";
 import "./TodoForm.css";
 
-export default function TodoForm({ countTodos, onAddTodo }) {
+export default function TodoForm({ onAddTodo }) {
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -11,7 +12,7 @@ export default function TodoForm({ countTodos, onAddTodo }) {
     // Das machen wir mit Erstellung des Onjekts: const newTodo..
     // Die countTodos-Variable nehmen wir aus der App.js als todos.lenght
 
-    const newTodo = { id: countTodos + 1, title: inputValue };
+    const newTodo = { id: nanoid(), title: inputValue };
 
     onAddTodo(newTodo);
 
