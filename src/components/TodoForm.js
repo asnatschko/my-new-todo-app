@@ -12,7 +12,7 @@ export default function TodoForm({ onAddTodo }) {
     // Das machen wir mit Erstellung des Onjekts: const newTodo..
     // Die countTodos-Variable nehmen wir aus der App.js als todos.lenght
 
-    const newTodo = { id: nanoid(), title: inputValue };
+    const newTodo = { id: nanoid(), title: inputValue, isDone: false };
 
     onAddTodo(newTodo);
 

@@ -1,7 +1,7 @@
 import "./App.css";
 import TodoItem from "./components/TodoItem.js";
 import TodoForm from "./components/TodoForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const todos = [
@@ -13,7 +13,15 @@ function App() {
   ];
 
   //State um die eingegebenen Todos in der (blauen) Liste zu sehen:
-  const [todoList, setTodoList] = useState(todos);
+  const [todoList, setTodoList] = useState(loadFromLocal() || todos);
+
+  useEffect(() => {
+    localStorage.setItem("_TODOOOS", JSON.stringify(todoList));
+  }, [todoList]);
+
+  function loadFromLocal() {
+    return JSON.parse(localStorage.getItem("_TODOOOS"));
+  }
 
   function toggleItem(todoId) {
     const updatedTodos = todoList.map((item) => {
